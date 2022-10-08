@@ -1,5 +1,0 @@
-rest template kullanarak
-postman form-data kısmından file gönderip
-controllerı file a göre ayarlayıp
-iki farklı spring boot uygulamasından 
-diğerine file aktarımı.

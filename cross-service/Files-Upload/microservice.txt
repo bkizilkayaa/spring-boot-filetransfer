@@ -1,0 +1,24 @@
+bir projenin iş yükünü aza indirgemek adına single-responsibility yapısı kurulur. 
+bu yapıda büyük bir proje tek bir işten sorumlu küçük parçalara ayrılır.
+oluşturulan parçalar arasındaki bağımlılıklar en aza indirgenir
+ve birinde yaptığımız değişiklik diğer parçaları etkilemez.
+bu da bize microservice yapısını sağlar. yazdığımız/yazılan servislerin
+başka projelerde tekrar kullanılmasını sağlar. 
+
+Aslında, microservice yaklaşımı ölçeklenebilirlik, esneklik, çeviklik gibi önemli avantajlar barındırır.
+Bu yüzdendir ki birçok önemli ve büyük şirket Netflix, Google, Amazon, Spotify gibi teknoloji liderleri, monolitik mimarilerinden microservice mimarisine geçiş yapmayı başarıyla tamamlamışlardır. 
+Bu arada, pek çok şirket bu yöntemi kullanmaya başlamakta ya da var olan sistemlerini bu mimariye evirmektedir.
+
+artan internet kullanımı ile birlikte trafiğin yoğunlaşması,
+projelerin bu trafik altında ezilmesine sebep olmuştur.
+mikroservis mimarisi bu yüzden önem kazanmaktadır.
+
+
+Uygulamanın küçük bir kısmında yapılan bir değişiklik, monolitik bir projenin tümünün yeniden derlenmesi ve tüm uygulamanın deploy edilmesini gerektirir.
+bunun aksine, microservicelerde yalnızca değiştirdiğiniz hizmetleri yeniden build ve deploy etmemiz yeterlidir.
+
+Zaman içinde oluşan sorunlar nedeniyle monolitik mimari ile geliştirilen uygulamalar yetersiz olmaya başlamıştır. 
+bu sorunu çözmek için microservice mimari tarzı benimsenmeye başlamıştır.
+
+Monolitik bir uygulamada iç haberleşme için rest ya da bus genellikle kullanılmaz. 
+Microservice mimarisinde servisler arası iletişimin yani REST isteklerin ya da bus üzerinden atılan mesajların yerine ulaştığını garanti etmeniz gerekir.

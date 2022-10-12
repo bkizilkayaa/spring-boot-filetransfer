@@ -1,146 +1,103 @@
 package com.burakkizilkaya.filetransfer.targetpath.controller;
 
 import com.burakkizilkaya.filetransfer.targetpath.model.FileResponseDto;
-<<<<<<< HEAD
 import com.burakkizilkaya.filetransfer.targetpath.service.FileDownloadService;
 import com.burakkizilkaya.filetransfer.targetpath.service.FileUploadService;
+import com.burakkizilkaya.filetransfer.targetpath.utilities.FileDownloadUtil;
+import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
-import org.springframework.http.*;
-import org.springframework.stereotype.Controller;
-=======
-import org.springframework.core.io.FileSystemResource;
 import org.springframework.http.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
->>>>>>> c3036d3a482389395ca201c246e20f68855c108a
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 
-<<<<<<< HEAD
 import java.io.*;
-=======
-import java.io.File;
-import java.io.IOException;
-import java.io.OutputStream;
->>>>>>> c3036d3a482389395ca201c246e20f68855c108a
+import java.net.MalformedURLException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
+import java.util.stream.Stream;
 
-<<<<<<< HEAD
-import static org.springframework.http.HttpHeaders.CONTENT_DISPOSITION;
-import static org.springframework.http.HttpStatus.CREATED;
-import static org.springframework.http.HttpStatus.NOT_FOUND;
-import static org.springframework.http.MediaType.parseMediaType;
-=======
-import static org.springframework.http.HttpMethod.POST;
-import static org.springframework.http.MediaType.MULTIPART_FORM_DATA;
->>>>>>> c3036d3a482389395ca201c246e20f68855c108a
+import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
+import static org.springframework.http.HttpStatus.*;
 
 @Controller
+@CrossOrigin("http://localhost:8080")
 @RequestMapping("/test")
 public class FileController {
-<<<<<<< HEAD
-    private static String webUrl = "http://localhost:8080/files/downloadfile/";
-    private static String webUrl2 = "http://localhost:8080/files/upload";
+    private String webUrl = "http://localhost:8080/files/downloadFile/";
+    private String webUrl2 = "http://localhost:8080/files/upload";
+
+    private String webUrlDownloadFile = "http://localhost:8080/files/downloadFile/";
+
     private RestTemplate restTemplate;
     private final FileUploadService fileUploadService;
     private final FileDownloadService fileDownloadService;
+    private final FileDownloadUtil fileDownloadUtil;
 
     public FileController(RestTemplate restTemplate,
                           FileUploadService fileUploadService,
-                          FileDownloadService fileDownloadService) {
+                          FileDownloadService fileDownloadService,
+                          FileDownloadUtil fileDownloadUtil) {
         this.restTemplate = restTemplate;
         this.fileUploadService = fileUploadService;
         this.fileDownloadService = fileDownloadService;
+        this.fileDownloadUtil = fileDownloadUtil;
     }
 
     @GetMapping("/{name}")
     public ResponseEntity<?> getFile(@PathVariable String name) {
-        webUrl = String.join("", webUrl, name);
-=======
-    private static String webUrl="http://localhost:8080/files/downloadfile/";
-    private static String webUrl2="http://localhost:8080/files/upload";
-    private RestTemplate restTemplate;
-
-    public FileController(RestTemplate restTemplate) {
-        this.restTemplate = restTemplate;
-    }
-
-    @GetMapping("/{name}")
-    public ResponseEntity<?> getFile(@PathVariable String name){
-        webUrl=String.join("",webUrl,name);
->>>>>>> c3036d3a482389395ca201c246e20f68855c108a
+        //webUrlDownloadFile = String.join("", webUrlDownloadFile, name);
+        //webUrlDownloadFile+=name;
         ResponseEntity<String> response
-                = restTemplate.getForEntity(webUrl, String.class);
+                = restTemplate.getForEntity(webUrl+name, String.class);
         return ResponseEntity.ok(response.getBody());
     }
-<<<<<<< HEAD
     @GetMapping("/downloadFile/{fileCode}")
-    public ResponseEntity<String> downloadFile(@PathVariable("fileCode") String fileCode) {
-        UrlResource resource=fileDownloadService.downloadFile(fileCode);
+    public ResponseEntity<?> downloadFile(@PathVariable("fileCode") String fileCode) {
+        Resource resource=null;
+        try {
+            resource = fileDownloadUtil.getFileAsResource(fileCode);
+        } catch (IOException e) {
+            return ResponseEntity.internalServerError().build();
+        }
+
         if (resource == null) {
-            return new ResponseEntity<>("file not found",NOT_FOUND);
+            return new ResponseEntity<>("File not found", NOT_FOUND);
         }
-        else{
-            String contentType = "application/octet-stream";
-            String headerValue = "attachment; filename=\"" + resource.getFilename() + "\"";
-            return ResponseEntity.ok()
-                    .contentType(parseMediaType(contentType))
-                    .header(CONTENT_DISPOSITION, headerValue)
-                    .body("file received!!!!.");
-        }
+
+        String contentType = "application/octet-stream";
+        String headerValue = "attachment; filename=\"" + resource.getFilename() + "\"";
+
+        return ResponseEntity.ok()
+                .contentType(MediaType.parseMediaType(contentType))
+                .header(HttpHeaders.CONTENT_DISPOSITION, headerValue)
+                .body(resource);
     }
 
     @PostMapping("/upload")
-    public ResponseEntity<FileResponseDto> uploadFile(@RequestParam("file") MultipartFile multipartFile)
+    public ResponseEntity<?> uploadFile(@RequestParam("file") MultipartFile multipartFile)
             throws IOException {
         //static import for HTTP CREATED
+        //return new ResponseEntity<>(fileUploadService.uploadFile(multipartFile), CREATED);
+        return new ResponseEntity<>(fileUploadService.uploadFileToServer(multipartFile), CREATED);
+    }
+
+    @PostMapping("/uploadlocal")
+    public ResponseEntity<?> uploadFileToLocal(@RequestParam("file") MultipartFile multipartFile)
+            throws IOException {
+        //static import for HTTP CREATED
+        //return new ResponseEntity<>(fileUploadService.uploadFile(multipartFile), CREATED);
         return new ResponseEntity<>(fileUploadService.uploadFile(multipartFile), CREATED);
     }
 
-=======
-
-    @PostMapping("/upload")
-    public ResponseEntity<FileResponseDto> uploadFile(@RequestParam("file") MultipartFile multipartFile)
-            throws IOException{
-
-        Path tempFile = Files.createTempFile(null, null);
-
-        Files.write(tempFile, multipartFile.getBytes());
-        File fileToSend = tempFile.toFile();
-
-        MultiValueMap<String, Object> parameters = new LinkedMultiValueMap<>();
-
-        //File file= write(multipartFile,"C:/myfiles");
-        File newFile = new File("/myfiles/ornek1.txt");
-
-        parameters.add("file",newFile);
-
-        HttpHeaders headers = new HttpHeaders();
-        headers.set("Content-Type", "multipart/form-data");
 
 
-        HttpEntity httpEntity = new HttpEntity<>(parameters, headers);
 
-
-        ResponseEntity<FileResponseDto> response
-                = restTemplate.postForEntity(webUrl2,httpEntity, FileResponseDto.class);
-
-        FileResponseDto fileResponseDto=response.getBody();
-        return new ResponseEntity<>(fileResponseDto, HttpStatus.CREATED);
-    }
->>>>>>> c3036d3a482389395ca201c246e20f68855c108a
-    private File write(MultipartFile file, String dir) throws IOException {
-        Path filepath = Paths.get(dir, file.getOriginalFilename());
-        try (OutputStream os = Files.newOutputStream(filepath)) {
-            os.write(file.getBytes());
-        }
-
-        return new File(dir);
-    }
 
 
 }

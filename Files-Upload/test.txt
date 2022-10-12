@@ -1,0 +1,31 @@
+  RestTemplate restTemplate = new RestTemplate();
+
+        HttpHeaders headers = new HttpHeaders();
+
+        // ContentType
+        headers.setContentType(MediaType.MULTIPART_FORM_DATA);
+
+        MultipartBodyBuilder multipartBodyBuilder = new MultipartBodyBuilder();
+
+        // Common form parameters.
+        multipartBodyBuilder.part("name", "spring cloud");
+        
+        // Custom ContentType.
+        multipartBodyBuilder.part("compment", """
+                [{"name": "open feign"}, {"name": "gateway"}]""", MediaType.APPLICATION_JSON);
+
+        // Load a file from disk.
+        Resource file1 = new FileSystemResource("C:\\logo.png");
+        multipartBodyBuilder.part("avatar", file1, MediaType.IMAGE_JPEG);
+
+        // Load the file from the classpath and add some extra request headers.
+        Resource file2 = new ClassPathResource("logo.png");
+        multipartBodyBuilder.part("avatar", file2, MediaType.TEXT_PLAIN)
+                    .header("X-Size", "400")
+                    .header("X-width", "400");
+
+        // multipart/form-data request body
+        MultiValueMap<String, HttpEntity<?>> multipartBody = multipartBodyBuilder.build();
+
+        // The complete http request body.
+        HttpEntity<MultiValueMap<String, HttpEntity<?>>> httpEntity = new HttpEntity<>(multipartBody, headers);

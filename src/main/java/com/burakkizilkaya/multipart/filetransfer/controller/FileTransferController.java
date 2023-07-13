@@ -50,7 +50,8 @@ public class FileTransferController {
 
     @GetMapping("/downloadFile/client/{fileCode}")
     public ResponseEntity<?> downloadFileToClient(@PathVariable("fileCode") String fileCode) throws IOException {
-        return new ResponseEntity<>(fileDownloadService.downloadFileToClient(fileCode).getBody(), HttpStatus.OK);
+       ResponseEntity<String> body = fileDownloadService.downloadFileToClient(fileCode);
+        return new ResponseEntity<>(body.getBody(), body.getStatusCode());
     }
 
     @GetMapping("/downloadFile/{fileCode}")

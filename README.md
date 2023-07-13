@@ -1,6 +1,15 @@
 ## [TR] -> Bu projede RestTemplate kullanarak :8080 portundan :8081 portunun Http Metodlarının çağrılması amaçlanmıştır. <br/> Sunucu tarafından (:8080) portundan, client tarafına (:8081) portuna dosya yazabilir, okuyabilirsiniz. <br/> <br/> Aşağıda projenin herkes tarafından anlaşılabilmesi için örnek bir kullanımını yaptım ve ingilizce doküman hazırladım. <br/> Umarım faydalı olacaktır. ⏬ ⏬ ⏬
 ## [EN] -> This project uses RestTemplate to call the Http methods of port :8081 from port :8080. <br/> You can write and read files on the Client-Side (:8081). ⏬ ⏬ ⏬ <br/>
 
+
+
+<img width="1088" alt="diagram" src="https://github.com/bkizilkayaa/spring-boot-filetransfer/assets/88281419/bd47475c-5dda-46b8-94c1-bf42d1b202b2">
+
+
+
+<br/>
+
+
 ## 1-) Get file
 ### 
 ```diff

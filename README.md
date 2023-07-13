@@ -1,4 +1,4 @@
-## [TR] -> Bu projede RestTemplate kullanarak :8080 portundan :8081 portunun Http Metodlarının çağrılması amaçlanmıştır. <br/> Sunucu tarafından (:8080) portundan, client tarafına (:8081) portuna dosya yazabilir, okuyabilirsiniz. <br/> <br/> Aşağıda projenin herkes tarafından anlaşılabilmesi için örnek bir kullanımını yaptım ve ingilizce doküman hazırladım. <br/> Umarım faydalı olacaktır. ⏬ ⏬ ⏬
+## [TR] -> Bu projede RestTemplate kullanarak :8080 portundan :8081 portunun Http Metodlarının çağrılması amaçlanmıştır. (veya tam tersi) <br/> Sunucu tarafından (:8080) portundan, client tarafına (:8081) portuna dosya yazabilir, okuyabilirsiniz. <br/> <br/> Aşağıda projenin herkes tarafından anlaşılabilmesi için örnek bir kullanımını yaptım ve ingilizce doküman hazırladım. <br/> Umarım faydalı olacaktır. ⏬ ⏬ ⏬
 ## [EN] -> This project uses RestTemplate to call the Http methods of port :8081 from port :8080. <br/> You can write and read files on the Client-Side (:8081). ⏬ ⏬ ⏬ <br/>
 
 

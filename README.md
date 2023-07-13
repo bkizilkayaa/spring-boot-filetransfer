@@ -3,7 +3,7 @@
 
 
 
-<img width="1088" alt="diagram" src="https://github.com/bkizilkayaa/spring-boot-filetransfer/assets/88281419/bd47475c-5dda-46b8-94c1-bf42d1b202b2">
+<img width="1024" alt="diagram" src="https://github.com/bkizilkayaa/spring-boot-filetransfer/assets/88281419/bd47475c-5dda-46b8-94c1-bf42d1b202b2">
 
 
 

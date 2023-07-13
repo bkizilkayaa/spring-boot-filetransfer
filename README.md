@@ -21,13 +21,13 @@
 ### Port : (:8080)
 ### RequestParam : "fileName" (as a String)
 
-<img width="1078" alt="1" src="https://github.com/bkizilkayaa/spring-boot-filetransfer/assets/88281419/bced4504-8d0b-4a50-8f99-443c3c5ca432">
+<img width="2156" alt="1" src="https://github.com/bkizilkayaa/spring-boot-filetransfer/assets/88281419/bced4504-8d0b-4a50-8f99-443c3c5ca432">
 
 </br>
 
 ### if file not found, you will get http not found error.
 
-<img width="1080" alt="2" src="https://github.com/bkizilkayaa/spring-boot-filetransfer/assets/88281419/666d47c2-e347-4a47-909b-b47d4f2221a5">
+<img width="2160" alt="2" src="https://github.com/bkizilkayaa/spring-boot-filetransfer/assets/88281419/666d47c2-e347-4a47-909b-b47d4f2221a5">
 
 <br/>
 
@@ -42,7 +42,7 @@
 ### Port : (:8080)
 ### RequestParam : "file" (as a MultipartFile)
 
-<img width="1079" alt="3" src="https://github.com/bkizilkayaa/spring-boot-filetransfer/assets/88281419/9bbfa2f1-4af5-438f-8357-afeb49637f46">
+<img width="2158" alt="3" src="https://github.com/bkizilkayaa/spring-boot-filetransfer/assets/88281419/9bbfa2f1-4af5-438f-8357-afeb49637f46">
 
 ### As you can see, there is no file named "springboot.png" on the client side. 
 
@@ -55,7 +55,7 @@
 
 ### As you can see, we successfully added file to client-side. (springboot.png)
 
-<img width="1080" alt="4" src="https://github.com/bkizilkayaa/spring-boot-filetransfer/assets/88281419/84f7b867-004a-4e91-8ca3-e8d9e1597ec4">
+<img width="2160" alt="4" src="https://github.com/bkizilkayaa/spring-boot-filetransfer/assets/88281419/84f7b867-004a-4e91-8ca3-e8d9e1597ec4">
 
 <br/>
 
@@ -72,6 +72,6 @@
 
 <br/>
 
-<img width="1079" alt="5" src="https://github.com/bkizilkayaa/spring-boot-filetransfer/assets/88281419/1d991ec7-564f-4791-8a5a-dfffd83c78bd">
+<img width="2158" alt="5" src="https://github.com/bkizilkayaa/spring-boot-filetransfer/assets/88281419/1d991ec7-564f-4791-8a5a-dfffd83c78bd">
 
 
